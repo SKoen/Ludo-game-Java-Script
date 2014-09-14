@@ -2,27 +2,32 @@
 var step = 50;
 var currcolor = "";
 var NumOfPaw = "";
+var positions = {
+    redpow1: 0, redpawn2: 0, redpawn3: 0, redpawn4: 0,
+    bluepawn1: 0, bluepawn2: 0, bluepawn3: 0, bluepawn4: 0,
+    greenpawn1: 0, greenpawn2: 0, greenpawn3: 0, greenpawn4: 0,
+    yellowpawn1: 0, yellowpawn2: 0, yellowpawn3: 0, yellowpawn4: 0
+};
 function stepDown() {
-    var doc = document.getElementById(currcolor + "paw"+NumOfPaw);
+    var doc = document.getElementById(currcolor + "pawn"+NumOfPaw);
     var curr = Number(doc.style.top.replace(/[a-z]/g, ''));
     doc.style.top = (curr+step)+'px';
     currPos++;
 }
 function stepUp() {
-    var doc = document.getElementById(currcolor + "paw" + NumOfPaw);
+    var doc = document.getElementById(currcolor + "pawn" + NumOfPaw);
     var curr = Number(doc.style.top.replace(/[a-z]/g, ''));
     doc.style.top = (curr - step) + 'px';
-
     currPos++;
 }
 function stepLeft() {
-    var doc = document.getElementById(currcolor + "paw" + NumOfPaw);
+    var doc = document.getElementById(currcolor + "pawn" + NumOfPaw);
     var curr = Number(doc.style.left.replace(/[a-z]/g, ''));
     doc.style.left = (curr - step) + 'px';
     currPos++;
 }
 function stepRight() {
-    var doc = document.getElementById(currcolor + "paw" + NumOfPaw);
+    var doc = document.getElementById(currcolor + "pawn" + NumOfPaw);
     var curr = Number(doc.style.left.replace(/[a-z]/g, ''));
     doc.style.left = (curr + step) + 'px';
     currPos++;
@@ -34,7 +39,7 @@ var stepsGreen =[];
 function pushSteps(value, steps, count) {
     for (i = 0; i < count; i++) steps.push(value);
 }
-//Red pawn
+//Red pawns path
 pushSteps(stepDown,stepsRed,4);
 pushSteps(stepRight, stepsRed,4);
 pushSteps(stepDown, stepsRed,2);
@@ -48,7 +53,7 @@ pushSteps(stepRight, stepsRed,4);
 pushSteps(stepUp, stepsRed,4);
 pushSteps(stepRight, stepsRed,1);
 pushSteps(stepDown, stepsRed,5);
-//Yellow token
+//Yellow pawns path
 
 pushSteps(stepUp, stepsYellow,4);
 pushSteps(stepLeft, stepsYellow,4);
@@ -64,7 +69,7 @@ pushSteps(stepDown, stepsYellow,4);
 pushSteps(stepLeft, stepsYellow,1);
 pushSteps(stepUp, stepsYellow,5);
 
-//Blue token
+//Blue pawns path
 pushSteps(stepLeft, stepsBlue,4);
 pushSteps(stepDown, stepsBlue,4);
 pushSteps(stepLeft, stepsBlue,2);
@@ -79,7 +84,7 @@ pushSteps(stepRight, stepsBlue,4);
 pushSteps(stepDown, stepsBlue,1);
 pushSteps(stepLeft, stepsBlue,5);
 
-//Green token
+//Green pawns path
 pushSteps(stepRight, stepsGreen,4);
 pushSteps(stepUp, stepsGreen,4);
 pushSteps(stepRight, stepsGreen,2);
@@ -97,8 +102,9 @@ pushSteps(stepRight, stepsGreen,5);
 function randomMove(Color,paw) {
     var num = 1;
     NumOfPaw = paw;
-    var position = currPos;
     currcolor = Color;
+    currPos = positions[currcolor + "pawn" + NumOfPaw];
+    var position = currPos;
     switch (Color) {
         case "red":
             for (i = currPos; i < position + num; i++) {
@@ -124,5 +130,6 @@ function randomMove(Color,paw) {
             }
             break;
     }
-    console.log(currPos);
+    positions[currcolor + "pawn" + NumOfPaw] = currPos;
+    console.log(position[currcolor + "pawn" + NumOfPaw]);
 }
