@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        .paws{
+            width:30px;
+            height:30px;
+            border-radius:20px;
+        }
+        #board{
+            background:url(/board.gif) no-repeat;
+            background-size:cover;
+            width:650px;
+            height:550px;
+            float:left;
+            margin-top:8px;
+        }
+    </style>
+    <script src="test.js"></script>
+</head>
+<body>
+    <div id="board"></div>
+<!--    <button type="button" onclick="stepLeft()">Left</button>
+    <button type="button" onclick="stepRight()">Right</button>
+    <button type="button" onclick="stepUp()">Top</button>
+    <button type="button" onclick="stepDown()">Bottom</button>-->
+    <button type="button" onclick="randomMove('red')" id="red">Roll</button>
+    <button type="button" onclick="randomMove('green')" id="green">Roll</button>
+    <button type="button" onclick="randomMove('blue')" id="blue">Roll</button>
+    <button type="button" onclick="randomMove('yellow')" id="yellow">Roll</button>
+
+
+
+    <div class="paws" id="redpaw" style="position:relative;background-color:red;top:0px;left:309px;right:0;bottom:0; color:white">4</div>
+    <div class="paws" id="yellowpaw" style="position:relative;background-color:yellow;top:464px;left:210px;right:0;bottom:0;color:white">4</div>
+    <div class="paws" id="greenpaw" style="position:relative;background-color:green;top:134px;left:13px;right:0;bottom:0;color:white">4</div>
+    <div class="paws" id="bluepaw" style="position:relative;background-color:blue;top:202px;left:506px;right:0;bottom:0;color:white">4</div>
+</body>
+</html>
