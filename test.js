@@ -2,7 +2,15 @@
 var step = 50;
 var currcolor = "";
 var NumOfPaw = "";
+var num = 0;
+var clicked = false;
 var positions = {
+    redpow1: 0, redpawn2: 0, redpawn3: 0, redpawn4: 0,
+    bluepawn1: 0, bluepawn2: 0, bluepawn3: 0, bluepawn4: 0,
+    greenpawn1: 0, greenpawn2: 0, greenpawn3: 0, greenpawn4: 0,
+    yellowpawn1: 0, yellowpawn2: 0, yellowpawn3: 0, yellowpawn4: 0
+};
+var onboard = {
     redpow1: 0, redpawn2: 0, redpawn3: 0, redpawn4: 0,
     bluepawn1: 0, bluepawn2: 0, bluepawn3: 0, bluepawn4: 0,
     greenpawn1: 0, greenpawn2: 0, greenpawn3: 0, greenpawn4: 0,
@@ -97,39 +105,50 @@ pushSteps(stepLeft, stepsGreen,2);
 pushSteps(stepUp, stepsGreen,4);
 pushSteps(stepLeft, stepsGreen,4);
 pushSteps(stepUp, stepsGreen,1);
-pushSteps(stepRight, stepsGreen,5);
-
-function randomMove(Color,paw) {
-    var num = 1;
+pushSteps(stepRight, stepsGreen, 5);
+function randomNum() {
+    if (!clicked) {
+        num = Math.floor((Math.random() * 6) + 1);
+        var dice = document.getElementById('dice');
+        dice.style.backgroundImage = "url(" + num + ".jpg)";
+        clicked = true;
+    }
+}
+function randomMove(Color, paw) {
     NumOfPaw = paw;
     currcolor = Color;
     currPos = positions[currcolor + "pawn" + NumOfPaw];
     var position = currPos;
-    switch (Color) {
-        case "red":
-            for (i = currPos; i < position + num; i++) {
-                stepsRed[i]();
-            }
-            break;
+    if (onboard[currcolor + "pawn" + NumOfPaw] == 1||num==6) {
+        switch (Color) {
+            case "red":
+                for (i = currPos; i < position + num; i++) {
+                    stepsRed[i]();
+                }
+                break;
 
-        case "yellow":
-            for (i = currPos; i < position + num; i++) {
-                stepsYellow[i]();
-            }
-            break;
+            case "yellow":
+                for (i = currPos; i < position + num; i++) {
+                    stepsYellow[i]();
+                }
+                break;
 
-        case "blue":
-            for (i = currPos; i < position + num; i++) {
-                stepsBlue[i]();
-            }
-            break;
+            case "blue":
+                for (i = currPos; i < position + num; i++) {
+                    stepsBlue[i]();
+                }
+                break;
 
-        case "green":
-            for (i = currPos; i < position + num; i++) {
-                stepsGreen[i]();
-            }
-            break;
+            case "green":
+                for (i = currPos; i < position + num; i++) {
+                    stepsGreen[i]();
+                }
+                break;
+        }
+        positions[currcolor + "pawn" + NumOfPaw] = currPos;
+        num = 0;
+        clicked = false;
+        var dice = document.getElementById('dice');
+        dice.style.backgroundImage = "url(dice.gif)";
     }
-    positions[currcolor + "pawn" + NumOfPaw] = currPos;
-    console.log(position[currcolor + "pawn" + NumOfPaw]);
 }
