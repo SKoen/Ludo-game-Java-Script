@@ -7,6 +7,7 @@
             width:30px;
             height:30px;
             border-radius:20px;
+            position:absolute;
         }
         #board{
             background:url(/board.gif) no-repeat;
@@ -25,16 +26,34 @@
     <button type="button" onclick="stepRight()">Right</button>
     <button type="button" onclick="stepUp()">Top</button>
     <button type="button" onclick="stepDown()">Bottom</button>-->
-    <button type="button" onclick="randomMove('red')" id="red">Red</button>
-    <button type="button" onclick="randomMove('green')" id="green">Green</button>
-    <button type="button" onclick="randomMove('blue')" id="blue">Blue</button>
-    <button type="button" onclick="randomMove('yellow')" id="yellow">Yellow</button>
+    <button type="button"  id="red">Red</button>
+    <button type="button" id="green">Green</button>
+    <button type="button" id="blue">Blue</button>
+    <button type="button"  id="yellow">Yellow</button>
 
 
+    <!-- red paws  start top 28 left 318-->
+    <div class="paws" id="redpaw1"    onclick="randomMove('red',1)"       style="background-color:red;top:149px;left:442px;"></div>
+    <div class="paws" id="redpaw2"    onclick="randomMove('red',2)"       style="background-color:red;top:102px;left:395px;"></div>
+    <div class="paws" id="redpaw3"    onclick="randomMove('red',3)"       style="background-color:red;top:55px;left:442px;"></div>
+    <div class="paws" id="redpaw4"    onclick="randomMove('red',4)"       style="background-color:red;top:102px;left:490px;"></div>
 
-    <div class="paws" id="redpaw" style="position:relative;background-color:red;top:0px;left:309px;right:0;bottom:0; color:white">4</div>
-    <div class="paws" id="yellowpaw" style="position:relative;background-color:yellow;top:464px;left:210px;right:0;bottom:0;color:white">4</div>
-    <div class="paws" id="greenpaw" style="position:relative;background-color:green;top:134px;left:13px;right:0;bottom:0;color:white">4</div>
-    <div class="paws" id="bluepaw" style="position:relative;background-color:blue;top:202px;left:506px;right:0;bottom:0;color:white">4</div>
+    <!-- yellow paws  start top 523 left 218-->
+    <div class="paws" id="yellowpaw1" onclick="randomMove('yellow',1)"    style="background-color:yellow;top:451px;left:47px;"></div>
+    <div class="paws" id="yellowpaw2" onclick="randomMove('yellow',2)"    style="background-color:yellow;top:451px;left:140px;"></div>
+    <div class="paws" id="yellowpaw3" onclick="randomMove('yellow',3)"    style="background-color:yellow;top:404px;left:93px;"></div>
+    <div class="paws" id="yellowpaw4" onclick="randomMove('yellow',4)"    style="background-color:yellow;top:498px;left:93px;"></div>
+
+    <!-- green paws  start top 227 left 22-->
+    <div class="paws" id="greenpaw1"  onclick="randomMove('green',1)"     style="background-color:green;top:149px;left:93px;"></div>
+    <div class="paws" id="greenpaw2"  onclick="randomMove('green',2)"     style="background-color:green;top:102px;left:140px;"></div>
+    <div class="paws" id="greenpaw3"  onclick="randomMove('green',3)"     style="background-color:green;top:55px;left:93px;"></div>
+    <div class="paws" id="greenpaw4"  onclick="randomMove('green',4)"     style="background-color:green;top:102px;left:47px;"></div>
+
+    <!-- blue paws  start top 326 left 515-->
+    <div class="paws" id="bluepaw1"   onclick="randomMove('blue',1)"      style="background-color:blue;top:451px;left:490px;"></div>
+    <div class="paws" id="bluepaw2"   onclick="randomMove('blue',2)"      style="background-color:blue;top:451px;left:395px;"></div>
+    <div class="paws" id="bluepaw3"   onclick="randomMove('blue',3)"      style="background-color:blue;top:404px;left:442px;"></div>
+    <div class="paws" id="bluepaw4"   onclick="randomMove('blue',4)"      style="background-color:blue;top:498px;left:442px;"></div>
 </body>
 </html>

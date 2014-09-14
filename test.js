@@ -1,27 +1,28 @@
-﻿var currPos =0;
+﻿var currPos = 0;
 var step = 50;
 var currcolor = "";
+var NumOfPaw = "";
 function stepDown() {
-    var doc = document.getElementById(currcolor + "paw");
+    var doc = document.getElementById(currcolor + "paw"+NumOfPaw);
     var curr = Number(doc.style.top.replace(/[a-z]/g, ''));
     doc.style.top = (curr+step)+'px';
     currPos++;
 }
 function stepUp() {
-    var doc = document.getElementById(currcolor + "paw");
+    var doc = document.getElementById(currcolor + "paw" + NumOfPaw);
     var curr = Number(doc.style.top.replace(/[a-z]/g, ''));
     doc.style.top = (curr - step) + 'px';
 
     currPos++;
 }
 function stepLeft() {
-    var doc = document.getElementById(currcolor + "paw");
+    var doc = document.getElementById(currcolor + "paw" + NumOfPaw);
     var curr = Number(doc.style.left.replace(/[a-z]/g, ''));
     doc.style.left = (curr - step) + 'px';
     currPos++;
 }
 function stepRight() {
-    var doc = document.getElementById(currcolor+"paw");
+    var doc = document.getElementById(currcolor + "paw" + NumOfPaw);
     var curr = Number(doc.style.left.replace(/[a-z]/g, ''));
     doc.style.left = (curr + step) + 'px';
     currPos++;
@@ -93,8 +94,9 @@ pushSteps(stepLeft, stepsGreen,4);
 pushSteps(stepUp, stepsGreen,1);
 pushSteps(stepRight, stepsGreen,5);
 
-function randomMove(Color) {
+function randomMove(Color,paw) {
     var num = 1;
+    NumOfPaw = paw;
     var position = currPos;
     currcolor = Color;
     switch (Color) {
