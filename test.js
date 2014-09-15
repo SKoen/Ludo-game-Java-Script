@@ -4,6 +4,28 @@ var currcolor = "";
 var NumOfPaw = "";
 var num = 0;
 var clicked = false;
+var currpawn = "";
+function Stuck() {
+    var text = document.getElementById('player');
+    if (onboard[currpawn] == 0) {
+        if (haveOtherFree()) {
+            alert("Нямаш ход :(");
+            clicked = false;
+            var dice = document.getElementById('dice');
+            dice.style.backgroundImage = "url(dice.gif)";
+            changePlayer();
+        }
+    }
+}
+function changePlayer() {
+    var text = document.getElementById('player');
+    switch(currcolor){
+        case "red": text.innerText = text.style.color = "blue"; break;
+        case "blue": text.innerText = text.style.color = "yellow"; break;
+        case "yellow": text.innerText = text.style.color = "green"; break;
+        case "green": text.innerText = text.style.color="red"; break;
+    }
+}
 var positions = {
     redpow1: 0, redpawn2: 0, redpawn3: 0, redpawn4: 0,
     bluepawn1: 0, bluepawn2: 0, bluepawn3: 0, bluepawn4: 0,
@@ -16,6 +38,12 @@ var onboard = {
     greenpawn1: 0, greenpawn2: 0, greenpawn3: 0, greenpawn4: 0,
     yellowpawn1: 0, yellowpawn2: 0, yellowpawn3: 0, yellowpawn4: 0
 };
+function haveOtherFree() {
+    for (var i = 1; i < 4; i++) {
+        if (onboard[currcolor + "pawn" + i] == 1) return false;
+    }
+    return true;
+}
 function stepDown() {
     var doc = document.getElementById(currcolor + "pawn"+NumOfPaw);
     var curr = Number(doc.style.top.replace(/[a-z]/g, ''));
@@ -23,19 +51,19 @@ function stepDown() {
     currPos++;
 }
 function stepUp() {
-    var doc = document.getElementById(currcolor + "pawn" + NumOfPaw);
+    var doc = document.getElementById(currpawn);
     var curr = Number(doc.style.top.replace(/[a-z]/g, ''));
     doc.style.top = (curr - step) + 'px';
     currPos++;
 }
 function stepLeft() {
-    var doc = document.getElementById(currcolor + "pawn" + NumOfPaw);
+    var doc = document.getElementById(currpawn);
     var curr = Number(doc.style.left.replace(/[a-z]/g, ''));
     doc.style.left = (curr - step) + 'px';
     currPos++;
 }
 function stepRight() {
-    var doc = document.getElementById(currcolor + "pawn" + NumOfPaw);
+    var doc = document.getElementById(currpawn);
     var curr = Number(doc.style.left.replace(/[a-z]/g, ''));
     doc.style.left = (curr + step) + 'px';
     currPos++;
@@ -115,40 +143,74 @@ function randomNum() {
     }
 }
 function randomMove(Color, paw) {
+    var text = document.getElementById('player');
     NumOfPaw = paw;
     currcolor = Color;
-    currPos = positions[currcolor + "pawn" + NumOfPaw];
+    currpawn = currcolor + "pawn" + NumOfPaw;
+    currPos = positions[currpawn];
     var position = currPos;
-    if (onboard[currcolor + "pawn" + NumOfPaw] == 1||num==6) {
-        switch (Color) {
-            case "red":
-                for (i = currPos; i < position + num; i++) {
-                    stepsRed[i]();
-                }
-                break;
+    if (text.innerText == currcolor) {
+        if (onboard[currpawn] === 1 || num === 6) {
+            if (onboard[currpawn] === 0) {
+                var doc = document.getElementById(currpawn);
+                var curr = Number(doc.style.left.replace(/[a-z]/g, ''));
+                switch (Color) {
+                    case "red":
+                        doc.style.left = 318 + 'px';
+                        doc.style.top = 28 + "px";
+                        break;
 
-            case "yellow":
-                for (i = currPos; i < position + num; i++) {
-                    stepsYellow[i]();
-                }
-                break;
+                    case "yellow":
+                        doc.style.left = 218 + 'px';
+                        doc.style.top = 523 + "px";
+                        break;
 
-            case "blue":
-                for (i = currPos; i < position + num; i++) {
-                    stepsBlue[i]();
-                }
-                break;
+                    case "blue":
+                        doc.style.left = 515 + 'px';
+                        doc.style.top = 326 + "px";
+                        break;
 
-            case "green":
-                for (i = currPos; i < position + num; i++) {
-                    stepsGreen[i]();
+                    case "green":
+                        doc.style.left = 22 + 'px';
+                        doc.style.top = 227 + "px";
+                        break;
                 }
-                break;
+                onboard[currpawn] = 1;
+            }
+            else {
+                switch (Color) {
+                    case "red":
+                        for (i = currPos; i < position + num; i++) {
+                            stepsRed[i]();
+                        }
+                        break;
+
+                    case "yellow":
+                        for (i = currPos; i < position + num; i++) {
+                            stepsYellow[i]();
+                        }
+                        break;
+
+                    case "blue":
+                        for (i = currPos; i < position + num; i++) {
+                            stepsBlue[i]();
+                        }
+                        break;
+
+                    case "green":
+                        for (i = currPos; i < position + num; i++) {
+                            stepsGreen[i]();
+                        }
+                        break;
+                }
+                positions[currpawn] = currPos;
+                changePlayer();
+            }
+            num = 0;
+            clicked = false;
+            var dice = document.getElementById('dice');
+            dice.style.backgroundImage = "url(dice.gif)";
         }
-        positions[currcolor + "pawn" + NumOfPaw] = currPos;
-        num = 0;
-        clicked = false;
-        var dice = document.getElementById('dice');
-        dice.style.backgroundImage = "url(dice.gif)";
+        else Stuck();
     }
 }
