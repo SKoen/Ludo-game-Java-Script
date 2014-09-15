@@ -8,8 +8,8 @@ var currpawn = "";
 function Stuck() {
     var text = document.getElementById('player');
     if (onboard[currpawn] == 0) {
-        if (haveOtherFree()) {
-            alert("Нямаш ход :(");
+        if (DontHaveOtherFree()) {
+            alert("Unfortunately you stuck :(");
             clicked = false;
             var dice = document.getElementById('dice');
             dice.style.backgroundImage = "url(dice.gif)";
@@ -19,12 +19,16 @@ function Stuck() {
 }
 function changePlayer() {
     var text = document.getElementById('player');
-    switch(currcolor){
+    switch(text.innerText){
         case "red": text.innerText = text.style.color = "blue"; break;
         case "blue": text.innerText = text.style.color = "yellow"; break;
         case "yellow": text.innerText = text.style.color = "green"; break;
         case "green": text.innerText = text.style.color="red"; break;
     }
+    var badtext = document.getElementById('badtext');
+    badtext.innerText = "";
+    var dice = document.getElementById('dice');
+    dice.style.backgroundImage = "url(dice.gif)";
 }
 var positions = {
     redpow1: 0, redpawn2: 0, redpawn3: 0, redpawn4: 0,
@@ -38,9 +42,10 @@ var onboard = {
     greenpawn1: 0, greenpawn2: 0, greenpawn3: 0, greenpawn4: 0,
     yellowpawn1: 0, yellowpawn2: 0, yellowpawn3: 0, yellowpawn4: 0
 };
-function haveOtherFree() {
+function DontHaveOtherFree() {
+    var text = document.getElementById('player');
     for (var i = 1; i < 4; i++) {
-        if (onboard[currcolor + "pawn" + i] == 1) return false;
+        if (onboard[text.innerText + "pawn" + i] == 1) return false;
     }
     return true;
 }
@@ -140,6 +145,12 @@ function randomNum() {
         var dice = document.getElementById('dice');
         dice.style.backgroundImage = "url(" + num + ".jpg)";
         clicked = true;
+    }
+    if (num != 6&&DontHaveOtherFree()) {
+        var bad = document.getElementById('badtext');
+        bad.innerText = "Unfortunatlly you stuck";
+        window.setTimeout(changePlayer, 2000)
+        clicked = false;
     }
 }
 function randomMove(Color, paw) {
