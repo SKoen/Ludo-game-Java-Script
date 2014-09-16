@@ -3,6 +3,10 @@
 <head>
     <title></title>
     <style>
+        #main{
+            width:1000px;
+            float:left;
+        }
         .pawns{
             width:30px;
             height:30px;
@@ -22,10 +26,16 @@
             padding-left:10px;
             padding-right:10px;
         }
+        footer{
+            font-size:larger;
+            color:darkred;
+
+        }
     </style>
     <script src="test.js"></script>
 </head>
 <body>
+    <div id="main">
     <div id="board"></div>
 <!--<button type="button" onclick="stepLeft()">Left</button>
     <button type="button" onclick="stepRight()">Right</button>
@@ -64,5 +74,7 @@
 
     <h4 id="uselesstext1">It`s a </h4><h3 id="player" style="float:left; color:red">red</h3><h4 id="uselesstext2"> turn</h4>
     <p id="badtext" style="float:left;"></p>
+    </div>
+    <footer title="Copyright by Slavi Koen" id="copyright">FOR ME</footer>
 </body>
 </html>
