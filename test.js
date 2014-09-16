@@ -281,7 +281,7 @@ function randomMove(Color, paw) {
                     if (victim != false) {
                         ResetPawn(victim);
                     }
-                    if (currPos == 44) { pawnOut[currcolor]++; onboard[currpawn] = 0; };
+                    if (currPos == 44) { pawnOut[currcolor]++; onboard[currpawn] = 0; positions[currpawn] = 0; document.getElementById(currpawn).style.visibility = "hidden"; };
                     CheckForWinner();
                     changePlayer();
                 }
