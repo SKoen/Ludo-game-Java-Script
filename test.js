@@ -185,7 +185,7 @@ function ResetPawn(victim) {
 }
 function randomNum() {
     if (!clicked) {
-        num = 6;
+        num = Math.floor((Math.random() * 6) + 1);;
         var dice = document.getElementById('dice');
         dice.style.backgroundImage = "url(" + num + ".jpg)";
         clicked = true;
